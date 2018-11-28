@@ -82,3 +82,6 @@ for start_ind, stop_ind in zip(*(start_inds, stop_inds)):
         copied_data[start_ind:stop_ind] = True
     #siw.write("pop_ind_"+str(ind)+"_popnbr_"+str(i), rate, data_tmp)
 """
+#%% Smarter way of saving recorded pops:
+labeled, nbr_labels = bwlabel(pops)
+plt.plot(t, labeled)    
