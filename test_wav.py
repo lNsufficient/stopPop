@@ -4,6 +4,7 @@ import scipy.io.wavfile as siw
 import scipy.ndimage.filters as filters
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.ndimage.measurements.label as bwlabel
 
 path = r'popcorn.wav'
 rate, a = siw.read(path)
@@ -48,3 +49,34 @@ plt.figure(10, clear=True)
 for (data, color, linestyle, marker) in [(a, 'b', '-', ""), (a_max, 'y', '-', ""), (thresh_a, 'r', '-', ""), (pops, 'k', '', 'o')]:
     plt.plot(data[0:short_range], color=color, linestyle=linestyle, marker=marker)
 plt.show()
+
+#%% Save data for recorded pops. 
+#THIS IS A FAILURE!
+"""
+pop_recording_length = 3 #seconds
+pop_recording_samples = rate*pop_recording_length//2
+
+row_inds = np.where(pops > 0)
+inds = row_inds[0]
+pop_inds = []
+len(inds)
+print inds
+#group inds...
+pop_recording = a[0:short_range]
+copied_data = np.empty(a.shape)
+copied_data[:] = False
+start_inds = inds - pop_recording_samples
+stop_inds = inds + pop_recording_samples
+good_inds =  []
+for start_ind, stop_ind in zip(*(start_inds, stop_inds)):
+    i
+    #print start_ind, stop_ind
+    copied_tmp = copied_data[start_ind:stop_ind]
+    tot_nbrs = stop_ind - start_ind
+    copied_nbrs = sum(copied_tmp)
+    q = copied_nbrs*1.0/tot_nbrs
+    if q < 0.5:
+        good_inds.append((start_ind, stop_ind))
+        copied_data[start_ind:stop_ind] = True
+    #siw.write("pop_ind_"+str(ind)+"_popnbr_"+str(i), rate, data_tmp)
+"""
