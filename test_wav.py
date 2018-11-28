@@ -4,10 +4,12 @@ import scipy.io.wavfile as siw
 import scipy.ndimage.filters as filters
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.ndimage.measurements.label as bwlabel
+from scipy.ndimage.measurements import label as bwlabel
 
 path = r'popcorn.wav'
 rate, a = siw.read(path)
+dt = 1.0/rate
+t = np.array(range(len(a)))*dt
 
 def visualize_a(a):
     print(a)
