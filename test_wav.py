@@ -41,10 +41,10 @@ def threshold_pop(a):
     return thresh_a, background_threshold
 
 thresh_a, background_threshold = threshold_pop(a_max)   
-pops = (thresh_a > 0)
+pops = (thresh_a > 0)*max(thresh_a)
 
 short_range = rate*50
 plt.figure(10, clear=True)
-for tup in [(a, 'b', None), (a_max, 'y', None), (thresh_a, 'r', None), (pops, 'k', 'o')]:
-    plt.plot(tup[0][0:short_range], color=tup[1], marker=tup[2])
+for (data, color, linestyle, marker) in [(a, 'b', '-', ""), (a_max, 'y', '-', ""), (thresh_a, 'r', '-', ""), (pops, 'k', '', 'o')]:
+    plt.plot(data[0:short_range], color=color, linestyle=linestyle, marker=marker)
 plt.show()
