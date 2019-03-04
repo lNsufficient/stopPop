@@ -6,6 +6,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.ndimage.measurements import label as bwlabel
 
+pop_path = r'C:\Users\edjn\not_job\stopPop'
+os.chdir(pop_path)
 path = r'popcorn.wav'
 rate, a = siw.read(path)
 dt = 1.0/rate
