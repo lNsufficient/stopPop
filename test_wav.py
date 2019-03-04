@@ -94,9 +94,9 @@ Nx = 256*8
 #psd(a, NFFT=Nx, Fs=rate, Fc=0, detrend='mean',window=scs.get_window('hamming', Nx), noverlap=0, pad_to=None,sides='default', scale_by_freq=None, return_line=None)
 plt.figure()
 matplotlib.pyplot.specgram(a, NFFT=Nx, Fs=rate, Fc=0, detrend=None, window=scs.get_window('hamming', Nx), noverlap=Nx/4, cmap='jet', xextent=None, pad_to=Nx*2, sides=None, scale_by_freq=None, mode=None, scale=None, vmin=None, vmax=None, data=None)
-labeled, nbr_labels = bwlabel(pops)
 bottom, top = plt.ylim()  # return the current ylim
 #%%
+labeled, nbr_labels = bwlabel(pops)
 pop_vec = (labeled > 0)*top*0.9
 pop_vec[pop_vec == 0] = np.nan
-plt.plot(t, pop_vec, 'k.')
+plt.plot(t, pop_vec, 'kx', alpha=0.5)
