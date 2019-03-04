@@ -47,7 +47,6 @@ def threshold_pop(a):
 
 thresh_a, background_threshold = threshold_pop(a_max)   
 pops = (thresh_a > 0)*max(thresh_a)
-
 short_range = rate*50
 plt.figure(10, clear=True)
 for (data, color, linestyle, marker) in [(a, 'b', '-', ""), (a_max, 'y', '-', ""), (thresh_a, 'r', '-', ""), (pops, 'k', '', 'o')]:
@@ -87,3 +86,17 @@ for start_ind, stop_ind in zip(*(start_inds, stop_inds)):
 #%% Smarter way of saving recorded pops:
 labeled, nbr_labels = bwlabel(pops)
 plt.plot(t, labeled)    
+#%%
+from matplotlib.pyplot import psd
+import matplotlib.pyplot
+import scipy.signal as scs
+Nx = 256*8
+#psd(a, NFFT=Nx, Fs=rate, Fc=0, detrend='mean',window=scs.get_window('hamming', Nx), noverlap=0, pad_to=None,sides='default', scale_by_freq=None, return_line=None)
+plt.figure()
+matplotlib.pyplot.specgram(a, NFFT=Nx, Fs=rate, Fc=0, detrend=None, window=scs.get_window('hamming', Nx), noverlap=Nx/4, cmap='jet', xextent=None, pad_to=Nx*2, sides=None, scale_by_freq=None, mode=None, scale=None, vmin=None, vmax=None, data=None)
+labeled, nbr_labels = bwlabel(pops)
+bottom, top = plt.ylim()  # return the current ylim
+#%%
+pop_vec = (labeled > 0)*top*0.9
+pop_vec[pop_vec == 0] = np.nan
+plt.plot(t, pop_vec, 'k.')
