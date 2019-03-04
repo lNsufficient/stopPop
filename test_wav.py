@@ -96,7 +96,13 @@ plt.figure()
 matplotlib.pyplot.specgram(a, NFFT=Nx, Fs=rate, Fc=0, detrend=None, window=scs.get_window('hamming', Nx), noverlap=Nx/4, cmap='jet', xextent=None, pad_to=Nx*2, sides=None, scale_by_freq=None, mode=None, scale=None, vmin=None, vmax=None, data=None)
 bottom, top = plt.ylim()  # return the current ylim
 #%%
+plt.figure()
 labeled, nbr_labels = bwlabel(pops)
 pop_vec = (labeled > 0)*top*0.9
 pop_vec[pop_vec == 0] = np.nan
 plt.plot(t, pop_vec, 'kx', alpha=0.5)
+#Only keep first label of each pop:
+#bwlabel so there are always zeros between groups:
+first_inds = (np.diff(labeled) > 0)*top*0.9
+first_inds[first_inds==0] = np.nan
+plt.plot(t[:-1], first_inds, 'ko', alpha=0.1)
