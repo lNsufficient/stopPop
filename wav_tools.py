@@ -1,4 +1,5 @@
 import scipy.io.wavfile as siw
+import numpy as np
 
 def play(a, rate=44100, filename='tmp.wav'):
     siw.write(filename, rate, a)
@@ -9,4 +10,6 @@ def play(a, rate=44100, filename='tmp.wav'):
 
 def read(path):
     rate, a = siw.read(path)
-    return rate, a
+    dt = 1.0/rate
+    t = np.array(range(len(a)))*dt
+    return rate, a, t
