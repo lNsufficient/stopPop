@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 from scipy.ndimage.measurements import label as bwlabel
 
 pop_path = r'C:\Users\edjn\not_job\stopPop'
-os.chdir(pop_path)
+#pop_path = r'/home/edjn/git/stopPop'
+#os.chdir(pop_path)
 path = r'popcorn.wav'
 rate, a = siw.read(path)
 dt = 1.0/rate
@@ -50,6 +51,8 @@ pops = (thresh_a > 0)*max(thresh_a)
 short_range = rate*50
 plt.figure(10, clear=True)
 for (data, color, linestyle, marker) in [(a, 'b', '-', ""), (a_max, 'y', '-', ""), (thresh_a, 'r', '-', ""), (pops, 'k', '', 'o')]:
+    if marker == "o":
+        continue
     plt.plot(data[0:short_range], color=color, linestyle=linestyle, marker=marker)
 plt.show()
 
